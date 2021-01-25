@@ -29,23 +29,12 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> icon = [
-    Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    ),
-    Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    )
+  int question=0;
+  List<Icon> icon = [];
+  List<String> questions=[
+    'Crocodiles do not have sweat glands?',
+    'Deficiency of Vitamin B17 leads to cancer?',
+    'Does the human nucleus contain 46 pairs of chromosomes?',
   ];
   void addicon(int filter) {
     setState(() {
@@ -72,8 +61,7 @@ class _QuizPageState extends State<QuizPage> {
         Expanded(
           flex: 4,
           child: Center(
-            child: Text(
-              'This is where the question text will go.',
+            child: Text(questions[question],
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 24,
@@ -89,6 +77,7 @@ class _QuizPageState extends State<QuizPage> {
               color: Colors.green,
               onPressed: () {
                 addicon(1);
+                question++;
               },
               child: Text("True"),
             ),
@@ -101,6 +90,7 @@ class _QuizPageState extends State<QuizPage> {
               color: Colors.red,
               onPressed: () {
                 addicon(2);
+                question++;
               },
               child: Text("False"),
             ),
