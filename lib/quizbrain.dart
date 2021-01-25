@@ -1,6 +1,7 @@
 import 'package:quizzler/question.dart';
 
 class Quizbrain {
+  int _question=0;
   List<Question> _input_data = [
     Question('Some cats are actually allergic to humans', true),
     Question('You can lead a cow down stairs but not up stairs.', false),
@@ -16,10 +17,14 @@ class Quizbrain {
     Question('Chocolate affects a dog\'s heart and nervous system; a few ounces are enough to kill a small dog.', true),
     Question('.In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.', true),
   ];
-
-  List<Question> get input_data => _input_data;
-
-  set input_data(List<Question> value) {
-    _input_data = value;
+  void NextQuestion(){
+    if(_question<_input_data.length)
+      _question++;
+  }
+  String getQuestionText(){
+    return _input_data[_question].QuestionText;
+  }
+  bool getAnswer(){
+    return _input_data[_question].answer;
   }
 }

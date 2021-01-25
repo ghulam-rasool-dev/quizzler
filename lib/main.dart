@@ -29,13 +29,13 @@ class QuizPage extends StatefulWidget {
   _QuizPageState createState() => _QuizPageState();
 }
 class _QuizPageState extends State<QuizPage> {
-  int question=0;
+
   bool useranswer;
 
   List<Icon> icon = [];
   void addicon(bool option) {
     setState(() {
-      if (quizbrain.input_data[question].answer==option) {
+      if (quizbrain.getAnswer()==option) {
         icon.add(Icon(
           Icons.check,
           color: Colors.green,
@@ -54,10 +54,11 @@ class _QuizPageState extends State<QuizPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+
         Expanded(
           flex: 4,
           child: Center(
-            child: Text(quizbrain.input_data[question].QuestionText,
+            child: Text(quizbrain.getQuestionText(),
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 24,
@@ -74,7 +75,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 useranswer=true;
                 addicon(useranswer);
-                question++;
+                quizbrain.NextQuestion();
               },
               child: Text("True"),
             ),
@@ -88,7 +89,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 useranswer=false;
                 addicon(useranswer);
-                question++;
+                quizbrain.NextQuestion();
               },
               child: Text("False"),
             ),
