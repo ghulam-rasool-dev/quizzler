@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'quizbrain.dart';
 
+Quizbrain quizbrain = Quizbrain();
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -22,23 +24,18 @@ class Quizzler extends StatelessWidget {
     );
   }
 }
-
 class QuizPage extends StatefulWidget {
   @override
   _QuizPageState createState() => _QuizPageState();
 }
-
 class _QuizPageState extends State<QuizPage> {
   int question=0;
+  bool useranswer;
+
   List<Icon> icon = [];
-  List<String> questions=[
-    'Crocodiles do not have sweat glands?',
-    'Deficiency of Vitamin B17 leads to cancer?',
-    'Does the human nucleus contain 46 pairs of chromosomes?',
-  ];
-  void addicon(int filter) {
+  void addicon(bool option) {
     setState(() {
-      if (filter == 1) {
+      if (quizbrain.input_data[question].answer==option) {
         icon.add(Icon(
           Icons.check,
           color: Colors.green,
@@ -51,7 +48,6 @@ class _QuizPageState extends State<QuizPage> {
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -61,7 +57,7 @@ class _QuizPageState extends State<QuizPage> {
         Expanded(
           flex: 4,
           child: Center(
-            child: Text(questions[question],
+            child: Text(quizbrain.input_data[question].QuestionText,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 24,
@@ -76,7 +72,8 @@ class _QuizPageState extends State<QuizPage> {
             child: FlatButton(
               color: Colors.green,
               onPressed: () {
-                addicon(1);
+                useranswer=true;
+                addicon(useranswer);
                 question++;
               },
               child: Text("True"),
@@ -89,7 +86,8 @@ class _QuizPageState extends State<QuizPage> {
             child: FlatButton(
               color: Colors.red,
               onPressed: () {
-                addicon(2);
+                useranswer=false;
+                addicon(useranswer);
                 question++;
               },
               child: Text("False"),
