@@ -14,7 +14,7 @@ class Quizbrain {
     Question('The total surface area of two human lungs is approximately 70 square metres.', true),
     Question('Google was originally called \"Backrub\".', true),
     Question('Chocolate affects a dog\'s heart and nervous system; a few ounces are enough to kill a small dog.', true),
-    Question('In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.', true),
+    Question('.In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.', true),
   ];
 
   List<Question> get input_data => _input_data;
