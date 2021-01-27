@@ -31,23 +31,9 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
 
   bool useranswer;
+  int correct=0,wrong=0;
 
-  List<Icon> icon = [];
-  void addicon(bool option) {
-    setState(() {
-      if (quizbrain.getAnswer()==option) {
-        icon.add(Icon(
-          Icons.check,
-          color: Colors.green,
-        ));
-      } else {
-        icon.add(Icon(
-          Icons.close,
-          color: Colors.red,
-        ));
-      }
-    });
-  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -73,9 +59,12 @@ class _QuizPageState extends State<QuizPage> {
             child: FlatButton(
               color: Colors.green,
               onPressed: () {
-                useranswer=true;
-                addicon(useranswer);
-                quizbrain.NextQuestion();
+                setState(() {
+                  useranswer=true;
+                  quizbrain.addicon(useranswer);
+                  quizbrain.NextQuestion(context);
+                });
+
               },
               child: Text("True"),
             ),
@@ -87,16 +76,19 @@ class _QuizPageState extends State<QuizPage> {
             child: FlatButton(
               color: Colors.red,
               onPressed: () {
-                useranswer=false;
-                addicon(useranswer);
-                quizbrain.NextQuestion();
+                setState(() {
+                  useranswer=false;
+                  quizbrain.addicon(useranswer);
+                  quizbrain.NextQuestion(context);
+                });
+
               },
               child: Text("False"),
             ),
           ),
         ),
         Row(
-          children: icon,
+          children: quizbrain.icon,
         )
       ],
     );
